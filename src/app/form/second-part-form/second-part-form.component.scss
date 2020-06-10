@@ -1,0 +1,274 @@
+.full-form1-box {
+    max-width: 1250px;
+}
+
+.only-mobile{
+    display: none;
+}
+
+.small-screen {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    height: auto;
+    width: 100%;
+    max-width: 330px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 15px 0 0;
+}
+
+.small-screen .title{
+    text-align: center;
+    font-size: 15px;
+    font-family: poppins;
+font-weight: 600;
+}
+
+.small-screen .price-container{
+    margin-top: 30px;
+    padding: 0 15px;
+}
+
+.small-screen .price-container .price{
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.small-screen .price-container .price span{
+    font-size: 30px;
+    font-family: poppins;
+font-weight: 600;
+    padding-top: 10px;
+}
+
+.small-screen .price-container .price span.big{
+    font-size: 50px;
+    padding: 0;
+}
+
+.small-screen .price-container .price-note{
+    font-size: 15px;
+    text-align: center;
+    font-family: poppins;
+font-weight: 200;
+}
+
+.small-screen .price-container .price span.text{
+    position: relative;
+    padding-right: 15px;
+    z-index: 11;
+}
+
+.small-screen .coverage-container{
+    margin-top: 30px;
+    padding: 0 15px;
+    padding-right: 31px;
+}
+
+.small-screen .coverage-container .coverage-title{
+    font-family: poppins;
+font-weight: 200;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.small-screen .coverage-container .amount{
+    font-family: poppins;
+font-weight: 600;
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.small-screen .coverage-container .amount span.text{
+    padding: 0 15px;
+    position: relative;
+    font-size: 45px;
+}
+
+.small-screen span.text span.dot{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    right: 0;
+    bottom: 20px;
+    border-radius: 100%;
+    background: rgb(24,168,88);
+    z-index: 5;
+    color: white;
+    font-size: 10px;
+    text-align: center;
+}
+
+.small-screen .price span.text span.dot {
+    bottom: 10px;
+}
+
+.small-screen span.text.invalid span.dot{
+    background: #EB5B6D;
+}
+
+@media screen and (min-width: 601px){
+    .small-screen span.text.invalid span.dot:hover:before{
+        content: '';
+        position: absolute;
+        top: 12px;
+        left: -1px;
+        width: 0; 
+        height: 0; 
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+    
+        border-bottom: 6px solid #EB5B6D;
+    }
+    
+    .small-screen span.text.invalid span.dot:hover:after{
+        content: '“You’ve selected an amount over $500,000. You can still apply for this amount, but a medical exam may be required.”';
+        position: absolute;
+        top: 18px;
+        right: -130px;
+        width: 260px;
+        padding: 15px;
+        font-size: 12px;
+        color: white;
+        background: #EB5B6D;
+        text-align: center;
+        line-height: 20px;
+    }
+    .small-screen .price-container .price span.text span.dot:hover:after{
+        right: -150px;
+        width: 300px;
+        content: 'This estimate uses your age, BMI, and gender to calculate a price for a generally healthy non-smoker in your state. Price may change after completing the full application. Some limitations and restrictions may apply.'
+    }
+}
+
+@media screen and (max-width: 600px){
+    .small-screen .clicked span.text.invalid span.dot:before{
+        content: '';
+        position: absolute;
+        top: 12px;
+        left: -1px;
+        width: 0; 
+        height: 0; 
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+    
+        border-bottom: 6px solid #EB5B6D;
+    }
+    .small-screen .clicked span.text.invalid span.dot:after{
+        content: '“You’ve selected an amount over $500,000. You can still apply for this amount, but a medical exam may be required.”';
+        position: absolute;
+        top: 18px;
+        right: -50px;
+        width: 200px;
+        padding: 15px;
+        font-size: 12px;
+        color: white;
+        background: #EB5B6D;
+        text-align: left;
+        line-height: 20px;
+    }
+
+    .small-screen .price-container .clicked span.text span.dot:after{
+        right: -61px;
+        width: 300px;
+        content: 'This estimate uses your age, BMI, and gender to calculate a price for a generally healthy non-smoker in your state. Price may change after completing the full application. Some limitations and restrictions may apply.'
+    }
+}
+
+.small-screen .price-container .price span.text span.dot{
+    padding: 0;
+    font-size: 10px;
+}
+
+.small-screen .coverage-container .years-container{
+    width: 100%;
+    max-width: 250px;
+    margin: 50px auto 20px;
+}
+
+.small-screen .coverage-container .years-container .years{
+    display: flex;
+    justify-content: space-between;
+}
+
+.small-screen .coverage-container .years-container .years li{
+    width: 35px;
+    height: 35px;
+    font-size: 12px;
+    border: 1px solid #535353;
+    opacity: 0.1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.small-screen .coverage-container .years-container .years li.active{
+    background: #EF989B;
+    opacity: 1;
+    border-color: #EF989B;
+}
+
+.small-screen .button-submit{
+    font-size: 12px;
+}
+
+.text-form2 {
+    margin-bottom: 5vh;
+}
+
+.col-inputs-form1{
+    &:nth-child(1){
+        justify-content: flex-end;
+    }
+}
+
+.text-form2 p {
+    font-family: poppins;
+    color: white;
+    font-size: 20px;
+    max-width: 380px;
+    width: 100%;
+    margin: 0 auto 30px;
+    line-height: 30px;
+}
+
+.bottom-text-form2 {
+    display: flex;
+    flex-direction: column;
+    word-wrap: break-word;
+    width: 100%;
+    max-width: 330px;
+    margin: 20px auto 0;
+    height: auto;
+}
+
+.bottom-text-form2 p {
+    color: #464646;
+    font-size: 12px;
+}
+
+@media screen and (max-width: 600px){
+    .full-form1-box .col-inputs-form1:first-child{
+        display: none;
+    }
+    .only-mobile{
+        padding: 30px 8% 0;
+        display: block;
+        text-align: center;
+        font-size: 14px;
+    }
+    .form-text{
+        margin: 20px 0;
+    }
+    .down-part-img-form2{
+        background-image: none;
+    }
+}
+

@@ -1,0 +1,83 @@
+<app-navbar [menuForm]="true" [backRoute]="'/form1'"></app-navbar>
+<app-loader [show]="isLoading"></app-loader>
+<div class="screen-set">
+    <div class="top-part">
+        <div class="loading-bar-box">
+            <div class="loading-bar-together">
+                <div class="empty-bar"></div>
+                <div class="completed-bar" style="width: 16%;"></div>
+            </div>
+        </div>
+        <div class="form-title">
+            <h2>Step 2 of 4:</h2>
+            <h1>Determine the coverage you want</h1>
+            <p class="only-mobile">
+                Get up to $500,000 of term life insurance without the medical exam or up to $1 million if you don’t mind
+                it.
+            </p>
+        </div>
+        <div class="form-text">
+        </div>
+    </div>
+    <div class="down-part-img-form2">
+        <div class="full-form1-box">
+            <div class="full-inputs-form1-box">
+                <div class="col-inputs-form1">
+                    <div class="text-form2">
+                        <p>
+                            Get up to $500,000 of term life insurance without the medical exam or up to $1 million if
+                            you don’t mind it.
+                        </p>
+                        <p>
+                            If you change your mind, you can cancel and full refund within 30 days.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-inputs-form1">
+                    <div class="small-screen">
+                        <p class="title">Your Quote</p>
+                        <div class="price-container">
+                            <div class="price" (click)="didClickPrice()" [ngClass]="priceClicked ? 'clicked' : ''">
+                                <span>$</span>
+                                <span class="big">{{priceNumber}}</span>
+                                <span class="text invalid">
+                                    .{{priceDecimal}}
+                                    <span class="dot">?</span>
+                                </span>
+                            </div>
+                            <p class="price-note">Estimated monthly premium</p>
+                        </div>
+                        <div class="coverage-container">
+                            <p class="coverage-title">coverage amount</p>
+                            <p class="amount" (click)="didClickAmount()" [ngClass]="amountClicked ? 'clicked' : ''">
+                                <span class="text" [ngClass]="coverageAmount <= 500000 ? '' : 'invalid'">
+                                    {{coverageAmount | currency:'USD':'symbol':'3.0'}}
+                                    <!-- {{coverageAmountLabel}} -->
+                                    <span class="dot">
+                                        {{coverageAmount <= 500000 ? '&#10003;' : '?'}}
+                                    </span>
+                                </span>
+                            </p>
+                            <ng5-slider [(value)]="coverageAmount" [options]="options" (userChange)="calculateQuote()">
+                            </ng5-slider>
+                            <div class="years-container">
+                                <p class="coverage-title">Years of coverage</p>
+                                <ul class="years">
+                                    <li [ngClass]="selectedYear === year ? 'active' : ''"
+                                        *ngFor="let year of coverageYears" (click)="selectYear(year)">{{year}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="button-form-box">
+                            <button class="button-submit no-anim" (click)="onSubmit()">START APPLICATION</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="help-group" (click)="helpClick()">
+            <label style="color: #EB5B6D;" for="Help">Help</label>
+            <img src="../../../assets/images/help-button.svg" alt="Help">
+        </div>
+    </div>
+</div>

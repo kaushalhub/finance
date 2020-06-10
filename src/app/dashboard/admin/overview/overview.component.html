@@ -1,0 +1,19 @@
+<div class="dashboardTab adminOverview">
+  <div class="header">
+    <h2>Welcome {{profile.firstName}}!</h2>
+    <p>Admin Dashboard</p>
+  </div>
+  <div class="info-container">
+    <div class="card-container">
+      <div class="title">
+        <p>New users</p>
+      </div>
+      <div class="card">
+        <!-- <h3>New users</h3> -->
+        <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis"
+          [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip" [dataLabels]="chartOptions.dataLabels">
+        </apx-chart>
+      </div>
+    </div>
+  </div>
+</div>

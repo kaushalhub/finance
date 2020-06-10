@@ -1,0 +1,95 @@
+<div class="dashboardTab billing">
+  <div class="header">
+    <h2>Billing Information</h2>
+    <p>Payment settings</p>
+  </div>
+  <div class="info-container">
+    <div class="card-container">
+      <div class="card">
+        <ul>
+          <li>
+            <p>Premium amount</p>
+            <b>{{data.monthly | currency:'USD'}}</b>
+          </li>
+          <li>
+            <p>Payment frequency</p>
+            <b>Monthly</b>
+          </li>
+          <li>
+            <p>Next payment date</p>
+            <b>{{data.nextPaymentDate}}</b>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="card-container">
+      <div class="title">
+        <p>Account info</p>
+        <div class="actions">
+          <a (click)="editFields()" class="button-link">{{ isEditingFields ? "Cancel" : "Update"}}</a>
+          <a *ngIf="isEditingFields" (click)="showReview = true" class="button-link-primary">Save</a>
+        </div>
+      </div>
+      <div class="card" [ngClass]="isEditingFields ? 'editingFields' : ''">
+        <ul>
+          <li class="start bankName">
+            <img src="../../../assets/images/account.svg" />
+            <input type="text" name="bankName" placeholder="Bank Name" [(ngModel)]="bankName"
+              [readonly]="!isEditingFields">
+          </li>
+          <li>
+            <p>Routing No.</p>
+            <b><input class="right semibold" type="text" name="routingNumber" placeholder="Routing Number"
+                [(ngModel)]="routingNumber" [readonly]="!isEditingFields"></b>
+          </li>
+          <li>
+            <p>Account Number</p>
+            <b><input class="right semibold" type="text" name="accountNumber" placeholder="Account Number"
+                [(ngModel)]="accountNumber" [readonly]="!isEditingFields"></b>
+          </li>
+          <li>
+            <p>Payment frequency</p>
+            <b><input class="right semibold" type="text" name="paymentfrequency" placeholder="Payment Frequency"
+                [(ngModel)]="paymentfrequency" [readonly]="!isEditingFields"></b>
+          </li>
+          <li class="checkboxes">
+            <p class="label">Type of account</p>
+            <b class="capitalized" *ngIf="!isEditingFields">{{accountType}}</b>
+            <div class="checkbox-box" *ngIf="isEditingFields">
+              <div class="checkbox-input" (click)="changeAccountType('Savings')"
+                [ngClass]="accountType === 'Savings' ? 'active' : ''">
+                <span class="checkbox-style"></span>
+                <p>Savings</p>
+              </div>
+              <div class="checkbox-input" (click)="changeAccountType('Checking')"
+                [ngClass]="accountType === 'Checking' ? 'active' : ''">
+                <span class="checkbox-style"></span>
+                <p>Checking</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Review modal -->
+<div class="guava-modal" *ngIf="showReview">
+  <div class="guava-modal-content">
+    <div class="guava-modal-title">
+      <!-- <h1>Alert</h1> -->
+    </div>
+    <div class="close" (click)="closeAlertModal()">
+      <img src="../../../assets/images/close.svg" alt="">
+    </div>
+    <div class="guava-modal-body">
+      <b style="font-size:18px;text-align:center;margin-bottom:20px;">Last Step:</b>
+      <p>
+        Please verify the payment details on the following form and provide your electronic signature. You can sign this
+        right on your computer or phone.
+      </p>
+      <button class="button-submit" (click)="save()">GO TO FORM</button>
+    </div>
+  </div>
+</div>

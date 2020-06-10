@@ -1,0 +1,44 @@
+<app-navbar *ngIf="!mobile" [menuForm]="false" [backRoute]="'/'"></app-navbar>
+<app-loader [show]="isLoading"></app-loader>
+<div class="screen-set">
+  <div class="login">
+    <div class="logo-container">
+      <img src="../../../../assets/images/logo.png" alt="">
+    </div>
+    <h2>Get registered!</h2>
+    <p>
+      When your life insurance application is approved you will be able to sign up.
+    </p>
+    <div class="form">
+      <div class="login-input">
+        <label>Email:</label>
+        <input type="email" name="email" placeholder="Your email" [(ngModel)]="email">
+      </div>
+      <div class="login-input">
+        <label>Password:</label>
+        <input class="login-input" type="password" name="password" placeholder="Your password" [(ngModel)]="password">
+      </div>
+      <div class="actions-container">
+        <button class="button-submit" (click)="onSubmit()">Register</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Alert modal -->
+<div class="guava-modal" *ngIf="alert !== ''">
+  <div class="guava-modal-content">
+    <div class="close" (click)="closeAlertModal()">
+      <img src="../../../assets/images/close.svg" alt="">
+    </div>
+    <div class="guava-modal-title">
+    </div>
+    <div class="guava-modal-body">
+      <p>
+        {{alert}}
+      </p>
+    </div>
+    <button *ngIf="alert === 'Welcome to Guava'" class="button-submit" [routerLink]="['/login']">Go to
+      dashboard</button>
+  </div>
+</div>

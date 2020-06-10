@@ -1,0 +1,68 @@
+<app-navbar *ngIf="!mobile" [menuForm]="false" [backRoute]="'/'"></app-navbar>
+
+<div class="screen-set">
+  <div class="login">
+    <div class="logo-container">
+      <img src="../../../../assets/images/logo.png" alt="">
+    </div>
+    <h2>Welcome back!</h2>
+    <p>
+      Log in to continue your life insurance application.
+    </p>
+    <div class="form">
+      <div class="login-input">
+        <label>Email:</label>
+        <input type="email" name="email" placeholder="Your email" [(ngModel)]="email">
+      </div>
+      <div class="login-input">
+        <label>Password:</label>
+        <input class="login-input" type="password" name="password" placeholder="Your password" [(ngModel)]="password">
+      </div>
+      <div class="actions-container">
+        <button class="button-submit" (click)="onSubmit()">Login</button>
+        <button class="button-link" (click)="signUp()">Dont have an account yet but you made an application
+          already?</button>
+        <button class="button-link" (click)="forgotPassword()">Forgot password?</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Forgot password modal -->
+<div class="guava-modal" *ngIf="showForgotModal">
+  <div class="guava-modal-content">
+    <div class="close" (click)="closeForgotModal()">
+      <img src="../../../assets/images/close.svg" alt="">
+    </div>
+    <div class="guava-modal-title">
+      <h1>Forgot password</h1>
+    </div>
+    <div class="guava-modal-body" *ngIf="!recoverySent">
+      <p>Please enter your email</p>
+      <input type="email" name="emailForgot" placeholder="Your email" [(ngModel)]="emailForgot">
+      <button class="button-submit" (click)="recoverPassword()">Recover password</button>
+    </div>
+    <div class="guava-modal-body" *ngIf="recoverySent">
+      <p>
+        Please follow the instructions in the email we just sent.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Alert modal -->
+<div class="guava-modal" *ngIf="alert !== ''">
+  <div class="guava-modal-content">
+      <div class="close" (click)="closeAlertModal()">
+          <img src="../../../assets/images/close.svg" alt="">
+      </div>
+      <div class="guava-modal-title">
+          <!-- <h1>Alert</h1> -->
+      </div>
+      <div class="guava-modal-body">
+          <p>
+              {{alert}}
+          </p>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,229 @@
+.another-style {
+    width: 33%;
+    text-align: start;
+}
+
+@media only screen and (max-width: 600px) {
+    .another-style {
+        width: 70%;
+    }
+}
+
+.full-form1-box {
+    max-width: 750px;
+}
+
+@media only screen and (max-width: 600px){
+    .full-form1-box {
+        width: 80%;
+    }
+}
+
+.legend-final p {
+    font-family: poppins;
+font-weight: 500;
+    font-size: 16px;
+    color: #464646;
+    margin: 5px 0;
+}
+
+.input-boxes {
+    height: auto;
+    width: 92%;
+    margin: 10px 0;
+    padding: 12px 4%;
+    background-color: white;
+    font-size: 14px;
+}
+
+.input-box-input {
+    font-size: 15px;
+    color: #464646;
+    margin: 10px 0;
+    width: 100%;
+    font-family: poppins;
+}
+
+.input-box-input::-webkit-input-placeholder { /* Edge */
+    color: #464646;
+}
+  
+.input-box-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #464646;
+}
+  
+.input-box-input::placeholder {
+    color: #464646;
+}
+
+.check-box-input {
+    background-color: transparent !important;
+    padding: 0;
+    width: 100%;
+    align-self: flex-start;
+}
+
+.input-boxes-labels {
+    font-family: poppins;
+font-weight: 600;
+    align-self: flex-start;
+    color: #464646;
+    margin-top: 20px;
+    font-size: 13px;
+}
+
+.button-form-box {
+    margin-top: 20px;
+}
+
+.algo {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.algo-input, .select-wrapper {
+    font-size: 15px;
+    color: #464646;
+    margin: 10px 0;
+    width: 48%;
+}
+
+.algo-input::-webkit-input-placeholder { /* Edge */
+    color: #464646;
+}
+  
+.algo-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #464646;
+}
+  
+.algo-input::placeholder {
+    color: #464646;
+}
+
+.select-wrapper{
+    margin-left: 12px;
+    position: relative;
+}
+
+.select-wrapper:before {
+    content: 'State';
+    position: absolute;
+    font-size: 9px;
+    top: 0;
+    left: 0;
+}
+
+.algo-input-state {
+    width: 100%;
+    font-size: 15px;
+    color: #464646;
+    font-family: poppins;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('../../../assets/images/chevron-down.png');
+    background-size: 15px auto;
+    background-position: right 5px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: 0;
+    line-height: 20px;
+    padding-top: 10px;
+}
+
+.horizontal-divider {
+    border: 1px solid #CECECE;
+    position: absolute;
+    top: 0;
+    left: 49%;
+    height: 40px;
+}
+
+.divider-opcional {
+    width: 100%;
+    border: 0.6px solid #CECECE;
+    display: none;
+}
+
+.algo-checkboxes{
+    padding: 10px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    p.label{
+        flex: 0 0 150px;
+        font-size: 15px;
+        @media screen and (max-width: 600px){
+            margin-bottom: 20px;
+        }
+    }
+    .checkbox-box{
+        // width: 40%;
+        @media screen and (max-width: 600px){
+            width: 80%;
+        }
+        margin-top: 0;
+        p{
+            font-weight: 400;
+        }
+        .checkbox-style{
+            width: 18px;
+            height: 18px;
+            border: 1px solid #C6C6C6;
+            &:after{
+                left: 6px;
+                top: 3px;
+                width: 3px;
+                height: 7px;
+            }
+        }
+    }
+}
+
+.explanation{
+    position: relative;
+    span.exp{
+        position: absolute;
+        top: 5px;
+        left: 95px;
+        width: 12px;
+        height: 12px;
+        border-radius: 100%;
+        font-size: 10px;
+        background: rgb(233, 93, 111);
+        color: white;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+}
+
+
+@media only screen and (max-width: 964px) { 
+
+    .algo{
+        justify-content: space-between;
+        position: relative;
+        .algo-input{
+            flex: 0 0 60%;
+            width: 60%;
+        }
+
+        .horizontal-divider {
+            left: 65%;
+            height: 32px;
+        }
+        .select-wrapper{
+            flex: 0 0 30%;
+            width: 30%;
+            margin: 0;
+        }
+    }
+}

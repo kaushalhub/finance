@@ -1,0 +1,57 @@
+.billing{
+  .info-container{
+    padding-top: 75px;
+  }
+  .card{
+    li{
+      &.bankName{
+        input{
+          font-size: 16px;
+        }
+      }
+      &.checkboxes{
+        padding: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        p.label{
+            flex: 0 0 130px;
+            font-size: 15px;
+            @media screen and (max-width: 600px){
+                margin-bottom: 20px;
+            }
+        }
+        .checkbox-box{
+            width: 40%;
+            @media screen and (max-width: 600px){
+                width: 80%;
+            }
+            margin-top: 0;
+            p{
+                font-weight: 400;
+            }
+            .checkbox-input{
+              pointer-events: none;
+            }
+            .checkbox-style{
+                width: 18px;
+                height: 18px;
+                border: 1px solid #C6C6C6;
+                &:after{
+                    left: 6px;
+                    top: 3px;
+                    width: 3px;
+                    height: 7px;
+                }
+            }
+        }
+      }
+    }
+    &.editingFields{
+      .checkbox-input{
+        pointer-events: auto !important;
+      }
+    }
+  }
+}

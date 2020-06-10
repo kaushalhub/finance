@@ -1,0 +1,10 @@
+<div class="hud" *ngIf="percentage | async as pct" [ngClass]="pct < 100 ? 'uploading' : ''">
+  <progress [value]="pct" max="100"></progress>
+  {{ pct | number }}%
+  <div class="actions" *ngIf="snapshot | async as snap">
+    <a (click)="task.pause()" class="button-icon" *ngIf="isActive(snap)">Pause</a>
+    <a (click)="task.cancel()" class="button-icon" *ngIf="isActive(snap)">Cancel</a>
+    <a (click)="task.resume()" class="button-icon" *ngIf="snap?.state === 'paused'">Resume</a>
+  </div>
+  
+</div>

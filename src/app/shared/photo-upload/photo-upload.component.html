@@ -1,0 +1,13 @@
+<app-loader [show]="loading"></app-loader>
+<div class="dropzone" dropZone (hovered)="toggleHover($event)" (dropped)="onDrop($event)" (click)="file.click()"
+    [class.hovering]="isHovering">
+    <input type="file" (change)="onDrop($event.target.files)" accept="image/*" #file>
+    <img *ngIf="variableOfImage === '../../../assets/images/image-icon.svg'" class="img-default" [src]="variableOfImage"
+        alt="">
+    <div *ngIf="variableOfImage != '../../../assets/images/image-icon.svg'" class="img-rounded">
+        <img [src]="variableOfImage" alt="">
+    </div>
+    <h3>Drag a profile photo here</h3>
+    <p>_or_</p>
+    <a class="button-flat-gray">Select Photo From Your Computer</a>
+</div>

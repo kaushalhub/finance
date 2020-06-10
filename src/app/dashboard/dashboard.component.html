@@ -1,0 +1,29 @@
+<app-navbar [menuForm]="false" [backRoute]="'/'" [isLoggedIn]="true"></app-navbar>
+<app-loader [show]="isLoading"></app-loader>
+<div *ngIf="data" class="screen-set">
+  <div class="dashboard" *ngIf="data && data.type === 2">
+    <ul class="tabs">
+      <li class="tab" [ngClass]="activeTab === tab ? 'active' : ''" *ngFor="let tab of tabs"
+        (click)="setActiveTab(tab)">{{tab}}</li>
+    </ul>
+    <div class="activeTab" [ngSwitch]="activeTab">
+      <app-overview [data]="data" (activeTabOutput)="setActiveTab($event)" *ngSwitchCase="'overview'"></app-overview>
+      <app-billing [data]="data" (newDataOutput)="updateData($event)" *ngSwitchCase="'billing'"></app-billing>
+      <app-beneficiaries [data]="data" (newDataOutput)="updateData($event)" *ngSwitchCase="'beneficiaries'">
+      </app-beneficiaries>
+      <app-personal [data]="data" (newDataOutput)="updateData($event)" *ngSwitchCase="'personal'"></app-personal>
+    </div>
+  </div>
+  <div class="dashboard" *ngIf="admin && admin.type === 1">
+    <ul class="tabs">
+      <li class="tab" [ngClass]="activeTab === tab ? 'active' : ''" *ngFor="let tab of adminTabs"
+        (click)="setActiveTab(tab)">{{tab}}</li>
+    </ul>
+    <div class="activeTab" [ngSwitch]="activeTab">
+      <!-- <app-admin-users [usersType]="5" *ngSwitchCase="'overview'"></app-admin-users> -->
+      <app-admin-users [usersType]="5" *ngSwitchCase="'users'"></app-admin-users>
+      <app-admin-users [usersType]="1" *ngSwitchCase="'quoted'"></app-admin-users>
+      <app-admin-users [usersType]="2" *ngSwitchCase="'incomplete apps'"></app-admin-users>
+    </div>
+  </div>
+</div>

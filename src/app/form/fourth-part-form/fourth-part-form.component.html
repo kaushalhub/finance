@@ -1,0 +1,89 @@
+<app-navbar [menuForm]="true" [backRoute]="'/form3'"></app-navbar>
+<app-loader [show]="isLoading"></app-loader>
+<div class="screen-set">
+    <div class="top-part">
+        <div class="loading-bar-box">
+            <div class="loading-bar-together">
+                <div class="empty-bar"></div>
+                <div class="completed-bar" style="width: 40%;"></div>
+            </div>
+        </div>
+        <div class="form-title">
+            <h2>Step 3 of 4:</h2>
+            <h1>Pre-screening questions</h1>
+        </div>
+        <div class="form-text">
+            <p>
+                Simply answer yes or no to the questions below.
+                <br>
+                This will help our underwriter determine eligibility.
+            </p>
+        </div>
+    </div>
+    <div class="down-part" style="background-color: #F4F4F4;">
+        <div class="full-form1-box">
+            <div class="input-box" style="background-color: transparent !important;">
+                <label for="complexMedical">Do you have a complex medical or psychiatric history?</label>
+                <div class="checkbox-box">
+                    <div class="checkbox-input" (click)="changeComplexMedical('Yes')" [ngClass]="complexMedical === 'Yes' ? 'active' : ''">
+                        <span class="checkbox-style"></span>
+                        <p>Yes</p>
+                    </div>
+                    <div class="checkbox-input" (click)="changeComplexMedical('No')" [ngClass]="complexMedical === 'No' ? 'active' : ''">
+                        <span class="checkbox-style"></span>
+                        <p>No</p>
+                    </div>
+                </div>
+                <span style="margin-top: 50px;">
+                    For example:
+                    <ul>
+                        <li>Cognitive Impairment</li>
+                        <li>Any medical or psychiatric condition that impacts functionality or ability to work or complete daily activities</li>
+                        <li>A recent cancer diagnosis</li>
+                        <li>Significant cardiac disease</li>
+                        <li>Taking medications such as Opioidsor Narcotics</li>
+                    </ul>
+                    
+                </span>
+            </div>
+            <div class="input-box" style="background-color: transparent !important;">
+                <label for="filledBankcruptcy">Have you filed for bankruptcy within the last two years or have
+                    unresolved judgements/liens in excess of $50,000?</label>
+                <div class="checkbox-box">
+                    <div class="checkbox-input" (click)="changeBankcruptcy('Yes')" [ngClass]="filledBankcruptcy === 'Yes' ? 'active' : ''">
+                        <span class="checkbox-style"></span>
+                        <p>Yes</p>
+                    </div>
+                    <div class="checkbox-input" (click)="changeBankcruptcy('No')" [ngClass]="filledBankcruptcy === 'No' ? 'active' : ''">
+                        <span class="checkbox-style"></span>
+                        <p>No</p>
+                    </div>
+                </div>
+            </div>
+            <div class="button-form1-box" style="width: 86%;">
+                <button class="button-submit" (click)="onSubmit()">SUBMIT</button>
+            </div>
+        </div>
+        <div class="help-group" (click)="helpClick()">
+            <label style="color: #FFFFFF;" for="Help">Help</label>
+            <img src="../../../assets/images/help-button.svg" alt="Help">
+        </div>
+    </div>
+</div>
+
+<!-- Alert modal -->
+<div class="guava-modal" *ngIf="alert !== ''">
+    <div class="guava-modal-content">
+      <div class="close" (click)="closeAlertModal()">
+        <img src="../../../assets/images/close.svg" alt="">
+      </div>
+      <div class="guava-modal-title">
+        <!-- <h1>Alert</h1> -->
+      </div>
+      <div class="guava-modal-body">
+        <p>
+          {{alert}}
+        </p>
+      </div>
+    </div>
+</div>

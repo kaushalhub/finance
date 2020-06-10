@@ -1,0 +1,240 @@
+<div class="dashboardTab adminUsers">
+  <div class="header">
+    <!-- <h2>{{usersType === 3 ? 'Pending Apps' : 'Clients'}}</h2> -->
+    <p>
+      <input #searchInput (keydown.enter)="applySearch(); searchInput.blur()" type="text" placeholder="Search"
+        [(ngModel)]="searchQuery" [ngClass]="query === '' ? 'canEdit' : ''" onfocus="this.placeholder = ''"
+        onblur="this.placeholder = 'Search'" [readonly]="query !== ''">
+      <a (click)="applySearch()" class="button">
+        <img *ngIf="query !== ''" src="../../../../assets/images/close.svg" alt="">
+        <img *ngIf="query === ''" src="../../../../assets/images/search.svg" alt="">
+      </a>
+    </p>
+  </div>
+  <div class="info-container" scrollable (scrollPosition)="scrollHandler($event)">
+    <a class="export" (click)="exportToCsv()"> Export </a>
+    <div class="header-row">
+      <div class="header-col">
+        Policy #
+      </div>
+      <div class="header-col">
+        First Name
+      </div>
+      <div class="header-col">
+        Last Name
+      </div>
+      <div class="header-col">
+        Email
+      </div>
+      <div class="header-col">
+        DOB
+      </div>
+      <div class="header-col">
+        Zip Code
+      </div>
+      <div class="header-col">
+        State
+      </div>
+      <div class="header-col">
+        Coverage Amount
+      </div>
+    </div>
+    <div class="user-row" *ngFor="let user of usersPaginated; let i = index" (click)="selectClient(user.email, i)">
+      <div class="user-col">
+        {{user.policyId}}
+      </div>
+      <div class="user-col">
+        {{user.firstName}}
+      </div>
+      <div class="user-col">
+        {{user.lastName}}
+      </div>
+      <div class="user-col">
+        {{user.email}}
+      </div>
+      <div class="user-col">
+        {{user.dateOfBirth}}
+      </div>
+      <div class="user-col">
+        {{user.zip}}
+      </div>
+      <div class="user-col">
+        {{user.state}}
+      </div>
+      <div class="user-col">
+        {{user.coverageAmount | currency:'USD':'symbol':'3.0'}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- User info modal -->
+<div class="guava-modal" *ngIf="showUserModal">
+  <div class="guava-modal-content" style="overflow-y: scroll !important;">
+    <div class="close" (click)="closeUserModal()">
+      <img src="../../../../assets/images/close.svg" alt="">
+    </div>
+    <div class="guava-modal-title">
+      <img
+        [src]="selectedUser.profile.image !== '' ? selectedUser.profile.image : '../../../../assets/images/black-profile-icon.png'"
+        alt="">
+    </div>
+    <div class="guava-modal-body">
+      <div class="card-container">
+        <div class="title">
+          <p>Insured</p>
+          <div class="actions">
+            <a (click)="editUser()" class="button-link">{{ isEditingFields ? "Cancel" : "Edit"}}</a>
+            <a *ngIf="isEditingFields" (click)="saveUser()" class="button-link-primary">Save</a>
+          </div>
+        </div>
+        <div class="card" [ngClass]="isEditingFields ? 'editingFields' : ''">
+          <h3>{{selectedUser.firstName}} {{selectedUser.profile.middleName}} {{selectedUser.lastName}}</h3>
+          <p class="policyNumber">
+            Policy #
+            <input type="text" name="policy" [(ngModel)]="editedUser.policyId" [readonly]="!isEditingFields" />
+          </p>
+          <ul>
+            <li>
+              <p>term length</p>
+              <b><input class="right semibold" type="text" name="firstName" placeholder=""
+                  [(ngModel)]="editedUser.termLength" [readonly]="!isEditingFields"></b>
+            </li>
+            <li>
+              <p>coverage amount</p>
+              <b><input class="right semibold" type="text" name="firstName" placeholder=""
+                  [(ngModel)]="editedUser.coverageAmount" [readonly]="!isEditingFields"></b>
+            </li>
+            <li>
+              <p>monthly premium</p>
+              <b><input class="right semibold" type="text" name="firstName" placeholder=""
+                  [(ngModel)]="editedUser.monthly" [readonly]="!isEditingFields"></b>
+            </li>
+            <li>
+              <p>start date</p>
+              <b><input class="right semibold" type="text" name="firstName"
+                  placeholder="{{isEditingFields ? 'mm/dd/yyyy' : '-'}}" [(ngModel)]="editedUser.startDate"
+                  [readonly]="!isEditingFields"></b>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="card-container">
+        <div class="title">
+          <p>Primary beneficiaries</p>
+        </div>
+        <div class="card">
+          <div class="row" *ngFor="let b of editedUser.beneficiaries">
+            <span class="left percentage">{{b.percentage}}</span>
+            <p>
+              {{b.firstName}} {{b.lastName}}
+            </p>
+            <p class="end">{{b.relation}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-container">
+        <div class="title">
+          <p>Questions' answers</p>
+        </div>
+        <div class="card">
+          <ul class="answers">
+            <li>
+              <p>Have you been declined for life insurance by another carrier within the last 24 months?</p>
+              <b>{{selectedUser.answers.declinedLifeInsurance}}</b>
+            </li>
+            <li>
+              <p>Do you have a history of criminal convictions?</p>
+              <b>{{selectedUser.answers.criminalHistory}}</b>
+            </li>
+            <li>
+              <p>Are you currently disabled, or collecting SSDI benefits?</p>
+              <b>{{selectedUser.answers.currentlyDisabled}}</b>
+            </li>
+            <li>
+              <p>Do you have life insurance or annuities outside of work or group life insurance?</p>
+              <b>{{selectedUser.answers.groupLifeInsurance}}</b>
+            </li>
+            <li>
+              <p>Do you have a complex medical or psychiatric history?</p>
+              <b>{{selectedUser.answers.complexMedical}}</b>
+            </li>
+            <li>
+              <p>Have you filed for bankruptcy within the last two years or have unresolved judgements/liens in excess
+                of $50,000?</p>
+              <b>{{selectedUser.answers.filledBankcruptcy}}</b>
+            </li>
+            <li>
+              <p>Is the bank account owner the same as the policy owner?</p>
+              <b>{{selectedUser.answers.accountOwnerSame}}</b>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="card-container billing">
+        <div class="title">
+          <p>Billing information</p>
+        </div>
+        <div class="card">
+          <div class="row">
+            <img class="left" src="../../../../assets/images/account.svg" alt="bank" />
+            <p>
+              {{editedUser.billingInfo.accountType}} Account Ends {{editedUser.billingInfo.accountNumberEnding}}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="card-container">
+        <div class="title">
+          <p>Contact information</p>
+        </div>
+        <div class="card" [ngClass]="isEditingFields ? 'editingFields' : ''">
+          <ul>
+            <li>
+              <p>Email</p>
+              <b>{{editedUser.profile.email}}</b>
+            </li>
+            <li>
+              <p>Phone number</p>
+              <b><input class="right semibold" type="text" name="firstName" placeholder=""
+                  [(ngModel)]="editedUser.profile.phone" [readonly]="!isEditingFields"></b>
+            </li>
+            <li>
+              <p>Address</p>
+              <b><input class="right semibold" type="text" name="firstName" placeholder=""
+                  [(ngModel)]="editedUser.profile.address" [readonly]="!isEditingFields"></b>
+            </li>
+            <li>
+              <p>Apt</p>
+              <b><input class="right semibold" type="text" name="firstName" placeholder=""
+                  [(ngModel)]="editedUser.profile.apt" [readonly]="!isEditingFields"></b>
+            </li>
+            <li>
+              <p>Zip code</p>
+              <b><input class="right semibold" type="text" name="firstName" placeholder=""
+                  [(ngModel)]="editedUser.profile.zip" [readonly]="!isEditingFields"></b>
+            </li>
+            <li>
+              <p>City</p>
+              <b><input class="right semibold" type="text" name="firstName" placeholder=""
+                  [(ngModel)]="editedUser.profile.city" [readonly]="!isEditingFields"></b>
+            </li>
+            <li>
+              <p>State</p>
+              <b><input class="right semibold" type="text" name="firstName" placeholder=""
+                  [(ngModel)]="editedUser.profile.state" [readonly]="!isEditingFields"></b>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="card-container">
+        <div class="title">
+          <p>Policy Documents</p>
+        </div>
+        <div class="card">
+          <file-upload [selectedUser]="selectedUser"></file-upload>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

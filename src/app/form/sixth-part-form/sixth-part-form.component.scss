@@ -1,0 +1,76 @@
+.sixth-step{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 80%;
+  max-width: 1080px;
+  margin: 100px auto;
+  justify-content: space-between;
+}
+
+.sixth-step .text{
+  flex: 0 0 46%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.sixth-step .text h1{
+  font-size: 28px;
+  font-family: poppins;
+font-weight: 600;
+  width: 100%;
+  margin-bottom: 100px;
+}
+
+.sixth-step .text p{
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.sixth-step .text p strong{
+  font-family: poppins;
+font-weight: 600;
+}
+
+.sixth-step .text a{
+  font-size: 16px;
+  font-family: poppins;
+font-weight: 600;
+  color: #009DFF;
+  text-decoration: underline;
+}
+
+.sixth-step img{
+  width: 46%;
+  flex: 0 0 46%;
+  height: auto;
+  max-height: 450px;
+  object-fit: contain;
+}
+
+@media screen and (max-width: 600px){
+  .sixth-step{
+    margin: 30px auto;
+  }
+  .sixth-step .text{
+    flex: 0 0 100%;
+  }
+  .sixth-step .text h1{
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 40px;
+  }
+  .sixth-step .text p,
+  .sixth-step .text a{
+    font-size: 14px;
+  }
+  .sixth-step .text{
+    margin-bottom: 20px;
+  }
+  .sixth-step img{
+    width: 100%;
+    flex: 0 0 100%;
+  }
+}

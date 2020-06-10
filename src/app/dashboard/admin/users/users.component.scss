@@ -1,0 +1,167 @@
+@import "../../../../variables.scss";
+
+.adminUsers {
+  .header {
+    text-align: center;
+    p {
+      display: flex;
+      justify-content: center;
+      a.button {
+        display: block;
+        border: 1px solid transparent;
+        padding: 5px;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        img {
+          width: 20px;
+          height: 20px;
+          object-fit: contain;
+          object-position: center;
+        }
+      }
+      input {
+        text-align: center;
+        border-bottom: 1px solid transparent;
+        &.canEdit {
+          &:focus,
+          &:active {
+            border-bottom-color: $dark;
+            & + a.button {
+              border-color: $dark;
+            }
+          }
+        }
+      }
+    }
+  }
+  .info-container {
+    overflow-y: scroll;
+    height: 50vh;
+    padding-top: 15px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    .header-row {
+      display: flex;
+      width: 100%;
+      max-width: 1400px;
+      padding: 0 20px;
+      margin-bottom: 5px;
+      justify-content: space-between;
+      .header-col {
+        flex: 0 0 11.5%;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        background: white;
+        font-weight: 600;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+      }
+    }
+    .user-row {
+      display: flex;
+      width: 100%;
+      max-width: 1400px;
+      padding: 0 20px;
+      cursor: pointer;
+      margin: 5px 0;
+      justify-content: space-between;
+      .user-col {
+        flex: 0 0 11.5%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: scroll;
+        font-size: 12px;
+      }
+      &:nth-child(2n + 1) {
+        .user-col {
+          background: rgb(228, 228, 228);
+        }
+      }
+    }
+  }
+}
+
+.guava-modal {
+  .guava-modal-content {
+    max-width: 550px;
+    .guava-modal-title {
+      text-align: center;
+      img {
+        height: 60px;
+        width: 60px;
+        object-position: center;
+        object-fit: cover;
+      }
+      h3 {
+        &.red {
+          color: $darkRed;
+        }
+        &.green {
+          color: $green;
+        }
+      }
+    }
+    .guava-modal-body {
+      padding-top: 20px;
+      input {
+        max-width: 150px;
+        font-size: 16px;
+        border: 0 !important;
+      }
+      .policyNumber {
+        display: flex;
+        span.actions {
+          margin-left: auto;
+          a {
+            margin-left: 10px;
+          }
+        }
+      }
+      .answers {
+        li {
+          flex-direction: column;
+          align-items: flex-start;
+          p {
+            margin-bottom: 5px;
+          }
+        }
+      }
+      .actions-container {
+        padding: 35px 0;
+        display: flex;
+        justify-content: space-between;
+        a {
+          flex: 0 0 46%;
+          &.button-flat-gray,
+          &.button-flat-primary {
+            flex: 0 0 calc(46% - 40px);
+            font-size: 14px;
+            font-family: lato;
+          }
+          &.button-flat-primary {
+            color: white;
+          }
+        }
+      }
+      .billing {
+        .card {
+          p {
+            text-transform: capitalize;
+          }
+        }
+      }
+    }
+  }
+}
+
+.export{
+  display: block;
+  margin-bottom: 10px;
+  text-align: center;
+}

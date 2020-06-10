@@ -1,0 +1,106 @@
+<app-navbar [menuForm]="false" [backRoute]="'/'"></app-navbar>
+<app-loader [show]="isLoading"></app-loader>
+<div class="screen-set">
+    <div class="top-part">
+        <div class="loading-bar-box">
+            <div class="loading-bar-together">
+                <div class="empty-bar"></div>
+                <div class="completed-bar" style="width: 8%;"></div>
+            </div>
+        </div>
+        <div class="form-title">
+            <h2>Step 1 of 4:</h2>
+            <h1>Tell us about yourself</h1>
+        </div>
+        <div class="form-text">
+            <p>
+                Guava will never spam your inbox.
+                <br>
+                We’re here when you need us, and not when you don’t.
+            </p>
+        </div>
+    </div>
+    <div class="down-part" style="background-color: #EF989B;">
+        <div class="full-form1-box">
+            <div class="full-inputs-form1-box">
+                <div class="input-box">
+                    <input type="text" name="firstName" placeholder="First name" [(ngModel)]="firstName">
+                    <div class="divider"></div>
+                    <input type="text" name="lastName" placeholder="Last name" [(ngModel)]="lastName">
+                </div>
+                <div class="input-box">
+                    <input type="email" name="email" placeholder="Email" [(ngModel)]="email">
+                    <div class="divider"></div>
+                    <input type="phone" name="phone" placeholder="Phone" [(ngModel)]="phone">
+                </div>
+                <div class="input-box">
+                    <label for="gender">Gender</label>
+                    <div class="input-buttons-box">
+                        <button [ngClass]="gender === 'male' ? 'forms-button-gender-active' : 'forms-button-gender'"
+                            (click)="changeGender('male')">Male</button>
+                        <button [ngClass]="gender === 'female' ? 'forms-button-gender-active' : 'forms-button-gender'"
+                            (click)="changeGender('female')">Female</button>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <label for="gender">Date of birth</label>
+                    <div class="input-buttons-box">
+                        <input type="number" class="forms-button-date" placeholder="mm" [(ngModel)]="monthBirth" min="1"
+                            max="12" (keydown)="validateDate($event, 'month')">
+                        <input type="number" class="forms-button-date" placeholder="dd" [(ngModel)]="dayBirth" min="1"
+                            max="31" (keydown)="validateDate($event, 'day')">
+                        <input type="number" class="forms-button-date" placeholder="yyyy" [(ngModel)]="yearBirth"
+                            min="1850" max="2020" (keydown)="validateDate($event, 'year')">
+                    </div>
+                </div>
+                <div class="input-box">
+                    <select name="height" [(ngModel)]="height">
+                        <option [value]="''" disabled>Height</option>
+                        <option [value]="height" *ngFor="let height of heights">{{height}}</option>
+                    </select>
+                </div>
+                <div class="input-box">
+                    <input type="number" name="weight" placeholder="Weight (lbs.)" [(ngModel)]="weight">
+                </div>
+                <div class="input-box">
+                    <select name="useNicotine" [(ngModel)]="useNicotine">
+                        <option [value]="nicotine.value" *ngFor="let nicotine of nicotineOptions">{{nicotine.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="input-box">
+                    <select name="state" [(ngModel)]="state">
+                        <option [value]="state.abbreviation" *ngFor="let state of states">{{state.name}}</option>
+                    </select>
+                </div>
+                <div class="input-box">
+                    <input type="number" name="social" placeholder="Social Security Number" [(ngModel)]="weight">
+                </div>
+            </div>
+            <div class="button-form-box">
+                <button class="button-submit white" (click)="onSubmit()">SEE QUOTE</button>
+            </div>
+        </div>
+        <div class="help-group" (click)="helpClick()">
+            <label style="color: #EB5B6D;" for="Help">Help</label>
+            <img src="../../../assets/images/help-button.svg" alt="Help">
+        </div>
+    </div>
+</div>
+
+<!-- Alert modal -->
+<div class="guava-modal" *ngIf="alert !== ''">
+    <div class="guava-modal-content">
+        <div class="close" (click)="closeAlertModal()">
+            <img src="../../../assets/images/close.svg" alt="">
+        </div>
+        <div class="guava-modal-title">
+            <!-- <h1>Alert</h1> -->
+        </div>
+        <div class="guava-modal-body">
+            <p>
+                {{alert}}
+            </p>
+        </div>
+    </div>
+</div>

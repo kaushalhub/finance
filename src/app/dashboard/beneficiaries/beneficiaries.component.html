@@ -1,0 +1,182 @@
+<div class="dashboardTab beneficiaries">
+  <div class="header">
+    <h2>Primary Beneficiaries</h2>
+    <p>{{assignedAmount}}% assigned</p>
+  </div>
+  <div class="info-container">
+    <div class="list-container" *ngIf="!isEditingFields && !isAddingNewOne">
+      <div class="card-container" *ngFor="let b of beneficiaries; let i = index">
+        <div class="card" [ngClass]="b.isEditingFields ? 'editingFields' : ''">
+          <div class="row">
+            <span class="left percentage">
+              {{b.percentage}}
+            </span>
+            <p>
+              <span>{{b.firstName}} {{b.lastName}}</span>
+            </p>
+            <p class="end">
+              {{b.relation}}
+            </p>
+          </div>
+          <div class="row-buttons">
+            <a (click)="editButtonBeneficiaryClicked(i)" class="button-flat-gray">
+              {{b.confirmDelete ? 'Cancel' : 'Edit'}}
+            </a>
+            <a (click)="deleteButtonBeneficiaryClicked(i)"
+              [ngClass]="b.confirmDelete ? 'button-flat-primary' : 'button-flat-gray'">
+              {{b.confirmDelete ? 'Confirm' : 'Delete'}}
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="card-container" *ngIf="assignedAmount < 100 && beneficiaries.length < 3">
+        <div class="card">
+          <div class="row addNewBeneficiary" (click)="isAddingNewOne = true;">
+            + Add new beneficiary
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="edit-container" *ngIf="isEditingFields || isAddingNewOne">
+      <div class="description">
+        <p>
+          The named person(s) who are first in line to receive the payout, aka the “death benefit” on a policy. You can
+          specify several primary beneficiaries and assign a percentage to divide the payout.
+        </p>
+        <p>
+          For example, if you have four children and would like each of them to receive an equal portion of the death
+          benefit, add all four as your primary beneficiaries with a percentage of 25%.
+        </p>
+        <a (click)="review()" class="button-submit">{{isEditingFields ? 'Save changes' : 'Add beneficiary'}}</a>
+        <a (click)="isEditingFields ? cancelEdition() : cancelAddNewOne()" class="button-flat-gray">Cancel</a>
+      </div>
+      <div class="fields">
+        <div class="card-container">
+          <div class="title">
+            <p>{{isEditingFields ? 'Edit beneficiaries' : 'Add beneficiary'}}</p>
+            <a *ngIf="isEditingFields" class="button-link-primary" (click)="deleteReview()">Delete</a>
+          </div>
+          <div class="card">
+            <ul>
+              <li>
+                <p class="p-sizing"><input class="input-sizing" type="text" name="firstName" placeholder="First Name"
+                    [(ngModel)]="selectedBeneficiary.firstName"></p>
+              </li>
+              <li>
+                <p class="p-sizing"><input class="input-sizing" type="text" name="lastName" placeholder="Last Name"
+                    [(ngModel)]="selectedBeneficiary.lastName"></p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-container">
+          <div class="card">
+            <div class="row">
+              <div class="select-wrapper">
+                <select name="relation" [(ngModel)]="selectedBeneficiary.relation">
+                  <option value="" disabled selected hidden>Relationship</option>
+                  <option [value]="relation" *ngFor="let relation of relations">{{relation}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-container">
+          <div class="card percentage">
+            <div class="row">
+              <p>Percentage</p>
+              <b class="end">{{selectedBeneficiary.percentage}}%</b>
+            </div>
+            <div class="row">
+              <ng5-slider [(value)]="selectedBeneficiary.percentage" [options]="options"></ng5-slider>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!addingMoreInformation" class="contact-info">
+          <b>Beneficiary Contact Information</b>
+          <p>
+            Add your beneficiary's information to make the claims process easier.
+          </p>
+          <a (click)="this.addingMoreInformation = true">
+            <img src="../../../assets/images/plus_circle.png" alt="">
+            <span>More Information</span>
+          </a>
+        </div>
+        <div *ngIf="addingMoreInformation" class="card-container">
+          <div class="card">
+            <ul>
+              <li>
+                <p class="p-sizing"><input class="input-sizing" type="text" name="phone" placeholder="Phone"
+                    [(ngModel)]="selectedBeneficiary.phone"></p>
+              </li>
+              <li>
+                <p class="p-sizing"><input class="input-sizing" type="text" name="email" placeholder="Email"
+                    [(ngModel)]="selectedBeneficiary.email"></p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="note" *ngIf="assignedAmount === 100">
+      100% of the benefit has been assigned. To add new beneficiaries, update your current percentages.
+    </div>
+  </div>
+</div>
+
+<!-- Alert modal -->
+<div class="guava-modal" *ngIf="alert !== ''">
+  <div class="guava-modal-content">
+    <div class="close" (click)="alert = ''">
+      <img src="../../../assets/images/close.svg" alt="">
+    </div>
+    <div class="guava-modal-title">
+      <!-- <h1>Alert</h1> -->
+    </div>
+    <div class="guava-modal-body">
+      <p>
+        {{alert}}
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Review modal -->
+<div class="guava-modal" *ngIf="showReview">
+  <div class="guava-modal-content">
+    <div class="guava-modal-title">
+      <!-- <h1>Alert</h1> -->
+    </div>
+    <div class="close" (click)="showReview = false">
+      <img src="../../../assets/images/close.svg" alt="">
+    </div>
+    <div class="guava-modal-body">
+      <b style="font-size:18px;text-align:center;margin-bottom:20px;">Last Step:</b>
+      <p>
+        Please verify the payment details on the following form and provide your electronic signature. You can sign this
+        right on your computer or phone.
+      </p>
+      <button class="button-submit" (click)="isEditingFields ? saveEdition() : saveAddNewOne()">GO TO FORM</button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Review modal -->
+<div class="guava-modal" *ngIf="showDeleteReview">
+  <div class="guava-modal-content">
+    <div class="guava-modal-title">
+      <!-- <h1>Alert</h1> -->
+    </div>
+    <div class="close" (click)="showDeleteReview = false">
+      <img src="../../../assets/images/close.svg" alt="">
+    </div>
+    <div class="guava-modal-body">
+      <b style="font-size:18px;text-align:center;margin-bottom:20px;">Last Step:</b>
+      <p>
+        Please verify the payment details on the following form and provide your electronic signature. You can sign this
+        right on your computer or phone.
+      </p>
+      <button class="button-submit" (click)="deleteBeneficiary(selectedBeneficiaryIndex)">GO TO FORM</button>
+    </div>
+  </div>
+</div>

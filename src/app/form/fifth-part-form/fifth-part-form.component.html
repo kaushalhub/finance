@@ -1,0 +1,168 @@
+<app-navbar [menuForm]="true" [backRoute]="'/form4'"></app-navbar>
+<app-loader [show]="isLoading"></app-loader>
+<div class="screen-set">
+    <div class="top-part">
+        <div class="loading-bar-box">
+            <div class="loading-bar-together">
+                <div class="empty-bar"></div>
+                <div class="completed-bar" style="width: 57%;"></div>
+            </div>
+        </div>
+        <div class="form-title">
+            <h1>Almost done!</h1>
+        </div>
+        <div class="form-text another-style">
+            <p>
+                Enter the account you’d like to use for premium payments.
+                <br>
+                Payments are billed monthly, and you will *not* be charged
+                until you’ve been approved for coverage.
+            </p>
+        </div>
+        <div class="legend-final">
+            <p>
+                Payment info
+            </p>
+        </div>
+    </div>
+    <div class="down-part" style="background-color: #F4F4F4;">
+        <div class="full-form1-box">
+            <div class="input-box check-box-input">
+                <label for="accountOwnerSame">Is the bank account owner the same as the policy owner?</label>
+                <div class="checkbox-box">
+                    <div class="checkbox-input" (click)="changeAccountOwnerSame('Yes')"
+                        [ngClass]="data.accountOwnerSame === 'Yes' ? 'active' : ''">
+                        <span class="checkbox-style"></span>
+                        <p>Yes</p>
+                    </div>
+                    <div class="checkbox-input" (click)="changeAccountOwnerSame('No')"
+                        [ngClass]="data.accountOwnerSame === 'No' ? 'active' : ''">
+                        <span class="checkbox-style"></span>
+                        <p>No</p>
+                    </div>
+                </div>
+            </div>
+
+            <span class="input-boxes-labels">Your full legal name:</span>
+            <div class="input-boxes">
+                <input class="input-box-input" type="text" name="firstName" placeholder="First name"
+                    [(ngModel)]="data.firstName">
+                <div class="divider"></div>
+                <input class="input-box-input" type="text" name="middleName" placeholder="Middle name"
+                    [(ngModel)]="data.middleName">
+                <div class="divider"></div>
+                <input class="input-box-input" type="text" name="lastName" placeholder="Last name"
+                    [(ngModel)]="data.lastName">
+            </div>
+
+            <span class="input-boxes-labels">Your contact information:</span>
+            <div class="input-boxes">
+                <input class="input-box-input" type="phone" name="phone" placeholder="Phone" [(ngModel)]="data.phone">
+                <div class="divider"></div>
+                <input class="input-box-input" type="email" name="email" placeholder="Email" [(ngModel)]="data.email">
+            </div>
+
+            <span class="input-boxes-labels">Your residential address:</span>
+            <div class="input-boxes">
+                <input class="input-box-input" type="text" name="phone" placeholder="Street address"
+                    [(ngModel)]="data.address">
+                <div class="divider"></div>
+                <input class="input-box-input" type="text" name="email" placeholder="Apt" [(ngModel)]="data.apt">
+                <div class="divider"></div>
+                <input class="input-box-input" type="text" name="email" placeholder="Zip code"
+                    [(ngModel)]="data.zipCode">
+                <div class="divider"></div>
+                <div class="algo">
+                    <input class="algo-input" type="text" placeholder="City" [(ngModel)]="data.city">
+                    <div class="horizontal-divider"></div>
+                    <div class="divider-opcional"></div>
+                    <div class="select-wrapper">
+                        <select class="algo-input-state" name="state" [(ngModel)]="data.state">
+                            <option [value]="state.abbreviation" *ngFor="let state of states">{{state.abbreviation}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <span class="input-boxes-labels">Your account info:</span>
+            <div class="input-boxes">
+                <input class="input-box-input" type="text" name="phone" placeholder="Bank Name"
+                    [(ngModel)]="data.bankName">
+                <div class="divider"></div>
+                <div class="explanation">
+                    <input class="input-box-input" type="text" name="email" placeholder="Routing No."
+                        [(ngModel)]="data.routingNumber">
+                    <span class="exp" (click)="showRoutingExp()" *ngIf="!data.routingNumber">?</span>
+                </div>
+                <div class="divider"></div>
+                <div class="explanation">
+                    <input class="input-box-input" type="text" name="email" placeholder="Account No."
+                        [(ngModel)]="data.accountNumber">
+                    <span class="exp" (click)="showAccountExp()" *ngIf="!data.accountNumber">?</span>
+                </div>
+                <div class="divider"></div>
+                <div class="algo-checkboxes">
+                    <p class="label">Type of account</p>
+                    <div class="checkbox-box">
+                        <div class="checkbox-input" (click)="changeAccountType('Savings')"
+                            [ngClass]="data.accountType === 'Savings' ? 'active' : ''">
+                            <span class="checkbox-style"></span>
+                            <p>Savings</p>
+                        </div>
+                        <div class="checkbox-input" (click)="changeAccountType('Checking')"
+                            [ngClass]="data.accountType === 'Checking' ? 'active' : ''">
+                            <span class="checkbox-style"></span>
+                            <p>Checking</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-form-box">
+                <button class="button-submit" (click)="review()">SUBMIT</button>
+            </div>
+        </div>
+        <div class="help-group" (click)="helpClick()">
+            <label style="color: #FFFFFF;" for="Help">Help</label>
+            <img src="../../../assets/images/help-button.svg" alt="Help">
+        </div>
+    </div>
+</div>
+
+
+<!-- Alert modal -->
+<div class="guava-modal" *ngIf="alert !== ''">
+    <div class="guava-modal-content">
+        <div class="close" (click)="closeAlertModal()">
+            <img src="../../../assets/images/close.svg" alt="">
+        </div>
+        <div class="guava-modal-title">
+            <!-- <h1>Alert</h1> -->
+        </div>
+        <div class="guava-modal-body">
+            <p>
+                {{alert}}
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Review modal -->
+<div class="guava-modal" *ngIf="showReview">
+    <div class="guava-modal-content">
+        <div class="guava-modal-title">
+            <!-- <h1>Alert</h1> -->
+        </div>
+        <div class="close" (click)="showReview = false">
+            <img src="../../../assets/images/close.svg" alt="">
+        </div>
+        <div class="guava-modal-body">
+            <b style="font-size:18px;text-align:center;margin-bottom:20px;">Last Step:</b>
+            <p>
+                Please verify the payment details on the following form and provide your electronic signature. You can
+                sign this right on your computer or phone.
+            </p>
+            <button class="button-submit" (click)="onSubmit()">GO TO FORM</button>
+        </div>
+    </div>
+</div>

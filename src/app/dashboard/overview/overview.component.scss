@@ -1,0 +1,32 @@
+@import "../../../variables.scss";
+
+.card-container{
+  &:nth-child(1){
+    li{
+      &:nth-child(1){
+        padding-top: 15px;
+      }
+    }
+  }
+}
+
+.documents{
+  .title{
+    b{
+      font-weight: 600;
+    }
+  }
+  .card{
+    .row{
+      margin-bottom: 15px;
+      a{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        .left{
+          border-radius: 0;
+        }
+      }
+    }
+  }
+}

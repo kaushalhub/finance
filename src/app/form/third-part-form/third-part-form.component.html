@@ -1,0 +1,104 @@
+<app-navbar [menuForm]="true" [backRoute]="'/form2'"></app-navbar>
+<app-loader [show]="isLoading"></app-loader>
+<div class="screen-set">
+    <div class="top-part">
+        <div class="loading-bar-box">
+            <div class="loading-bar-together">
+                <div class="empty-bar"></div>
+                <div class="completed-bar" style="width: 40%;"></div>
+            </div>
+        </div>
+        <div class="form-title">
+            <h2>Step 3 of 4:</h2>
+            <h1>Pre-screening questions</h1>
+        </div>
+        <div class="form-text">
+            <p>
+                Simply answer yes or no to the questions below. This will help our underwriter determine eligibility.
+            </p>
+        </div>
+    </div>
+    <div class="down-part" style="background-color: #F4F4F4;">
+        <div class="full-form1-box">
+            <div class="input-box" style="background-color: transparent !important;">
+                <label for="declinedLifeInsurance">Have you been declined for life insurance by another carrier within
+                    the last 24 months?</label>
+                <div class="checkbox-box">
+                    <div class="checkbox-input" (click)="changeDeclinedLifeInsurance('Yes')" [ngClass]="declinedLifeInsurance === 'Yes' ? 'active' : ''">
+                        <span class="checkbox-style"></span>
+                        <p>Yes</p>
+                    </div>
+                    <div class="checkbox-input" (click)="changeDeclinedLifeInsurance('No')" [ngClass]="declinedLifeInsurance === 'No' ? 'active' : ''">
+                        <span class="checkbox-style"></span>
+                        <p>No</p>
+                    </div>
+                </div>
+            </div>
+            <div class="input-box" style="background-color: transparent !important;">
+                <label for="criminalHistory">Do you have a history of criminal convictions?</label>
+                <div class="checkbox-box">
+                    <div class="checkbox-input" (click)="changeCriminalHistory('Yes')" [ngClass]="criminalHistory === 'Yes' ? 'active' : ''">
+                        <span class="checkbox-style"></span>
+                        <p>Yes</p>
+                    </div>
+                    <div class="checkbox-input" (click)="changeCriminalHistory('No')" [ngClass]="criminalHistory === 'No' ? 'active' : ''">
+                        <span class="checkbox-style"></span>
+                        <p>No</p>
+                    </div>
+                </div>
+            </div>
+            <div class="input-box" style="background-color: transparent !important;">
+                <label for="currentlyDisabled">Are you currently disabled, or collecting SSDI benefits?</label>
+                <div class="checkbox-box">
+                    <div class="checkbox-input" (click)="changeCurrentlyDisabled('Yes')" [ngClass]="currentlyDisabled === 'Yes' ? 'active' : ''">
+                        <span class="checkbox-style"></span>
+                        <p>Yes</p>
+                    </div>
+                    <div class="checkbox-input" (click)="changeCurrentlyDisabled('No')" [ngClass]="currentlyDisabled === 'No' ? 'active' : ''">
+                        <span class="checkbox-style"></span>
+                        <p>No</p>
+                    </div>
+                </div>
+            </div>
+            <div class="input-box" style="background-color: transparent !important;">
+                <label for="groupLifeInsurance">Do you have life insurance or annuities outside of work or group life
+                    insurance?</label>
+                <div class="checkbox-box">
+                    <div class="checkbox-input" (click)="changeGroupLifeInsurance('Yes')" [ngClass]="groupLifeInsurance === 'Yes' ? 'active' : ''">
+                        <span class="checkbox-style"></span>
+                        <p>Yes</p>
+                    </div>
+                    <div class="checkbox-input" (click)="changeGroupLifeInsurance('No')" [ngClass]="groupLifeInsurance === 'No' ? 'active' : ''">
+                        <span class="checkbox-style"></span>
+                        <p>No</p>
+                    </div>
+                </div>
+            </div>
+            <div class="button-form1-box" style="width: 86%;">
+                <button class="button-submit" (click)="onSubmit()">SUBMIT</button>
+            </div>
+        </div>
+        <div class="help-group" (click)="helpClick()">
+            <label style="color: #FFFFFF;" for="Help">Help</label>
+            <img src="../../../assets/images/help-button.svg" alt="Help">
+        </div>
+    </div>
+</div>
+
+
+<!-- Alert modal -->
+<div class="guava-modal" *ngIf="alert !== ''">
+    <div class="guava-modal-content">
+      <div class="close" (click)="closeAlertModal()">
+        <img src="../../../assets/images/close.svg" alt="">
+      </div>
+      <div class="guava-modal-title">
+        <!-- <h1>Alert</h1> -->
+      </div>
+      <div class="guava-modal-body">
+        <p>
+          {{alert}}
+        </p>
+      </div>
+    </div>
+</div>

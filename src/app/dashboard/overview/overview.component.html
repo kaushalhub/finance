@@ -1,0 +1,83 @@
+<div class="dashboardTab overview">
+  <div class="header">
+    <h2>Welcome {{data.firstName}}!</h2>
+    <p>Policy questions? Call 678887765</p>
+  </div>
+  <div class="info-container">
+    <div class="card-container">
+      <div class="title">
+        <p>Insured</p>
+      </div>
+      <div class="card">
+        <h3>{{data.firstName}} {{data.lastName}}</h3>
+        <p class="policyNumber">Policy #{{data.policyId}}</p>
+        <ul>
+          <li>
+            <p>term length</p>
+            <b>{{data.termLength}}</b>
+          </li>
+          <li>
+            <p>coverage amount</p>
+            <b>{{data.coverageAmount | currency:'USD':'symbol':'3.0'}}</b>
+          </li>
+          <li>
+            <p>monthly premium</p>
+            <b>{{data.monthly | currency:'USD'}}</b>
+          </li>
+          <li>
+            <p>start date</p>
+            <b>{{data.startDate}}</b>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="card-container">
+      <div class="title">
+        <p>Primary beneficiaries</p>
+        <a class="button-link" (click)="setActiveTab('beneficiaries')">View</a>
+      </div>
+      <div class="card">
+        <div class="row" *ngFor="let b of data.beneficiaries">
+          <span class="left percentage">{{b.percentage}}</span>
+          <p>
+            {{b.firstName}} {{b.lastName}}
+          </p>
+          <p class="end light">{{b.relation}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-container">
+      <div class="title">
+        <p>Billing information</p>
+        <a class="button-link" (click)="setActiveTab('billing')">View</a>
+      </div>
+      <div class="card">
+        <div class="row">
+          <img class="left" src="../../../assets/images/account.svg" />
+          <p class="capitalized">
+            {{data.billingInfo.accountType}} Account Ends {{data.billingInfo.accountNumberEnding}}
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="policy-docs">
+      <div class="title">
+        <b>Policy Documents</b>
+        <a class="button-link-primary" href="#">Download All</a>
+      </div>
+    </div> -->
+    <div class="card-container documents">
+      <div class="title">
+        <b>Policy Documents</b>
+      </div>
+      <div class="card">
+        <div class="row" *ngFor="let doc of documents">
+          <a [href]="doc.downloadURL" target="_blank" rel="noopener">
+            <img class="left" [src]="doc.imgExtension" alt="">
+            <p>{{doc.name}}</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

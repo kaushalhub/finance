@@ -1,0 +1,153 @@
+<div class="dashboardTab personal">
+  <div class="header">
+    <div class="name">
+      <!-- <div class="profile-image">
+        <img [src]="profileImage" alt="">
+        <a (click)="openEditPicModal()" class="button-link-primary">Edit</a>
+      </div> -->
+      <h2>{{firstName}} {{lastName}}</h2>
+    </div>
+    <p>Information settings</p>
+  </div>
+  <div class="info-container">
+    <div class="card-container">
+      <div class="title">
+        <p>Your full legal name:</p>
+        <div class="actions">
+          <a (click)="editFields()" class="button-link">{{ isEditingFields ? "Cancel" : "Edit"}}</a>
+          <a *ngIf="isEditingFields" (click)="review()" class="button-link-primary">Save</a>
+        </div>
+      </div>
+      <div class="card" [ngClass]="isEditingFields ? 'editingFields' : ''">
+        <ul>
+          <li>
+            <p>First name</p>
+            <b><input class="right semibold" type="text" name="firstName" placeholder="First Name"
+                [(ngModel)]="firstName" [readonly]="!isEditingFields"></b>
+          </li>
+          <li>
+            <p>Middle name</p>
+            <b><input class="right semibold" type="text" name="middleName" placeholder="-" [(ngModel)]="middleName"
+                [readonly]="!isEditingFields"></b>
+          </li>
+          <li>
+            <p>Last name</p>
+            <b><input class="right semibold" type="text" name="lastName" placeholder="Last Name" [(ngModel)]="lastName"
+                [readonly]="!isEditingFields"></b>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="card-container">
+      <div class="title">
+        <p>Contact information</p>
+      </div>
+      <div class="card" [ngClass]="isEditingFields ? 'editingFields' : ''">
+        <ul>
+          <li>
+            <p>Email</p>
+            <b><input class="right semibold" type="email" name="email" placeholder="Email" [(ngModel)]="email"
+                [readonly]="!isEditingFields"></b>
+          </li>
+          <li>
+            <p>Phone number</p>
+            <b><input class="right semibold" type="text" name="phoneNumber" placeholder="Phone number"
+                [(ngModel)]="phone" [readonly]="!isEditingFields"></b>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="card-container">
+      <div class="title">
+        <p>Your residencial address</p>
+      </div>
+      <div class="card" [ngClass]="isEditingFields ? 'editingFields' : ''">
+        <ul>
+          <li>
+            <p>Street address</p>
+            <b><input class="right semibold" type="text" name="address" placeholder="Address" [(ngModel)]="address"
+                [readonly]="!isEditingFields"></b>
+          </li>
+          <li>
+            <p>Apt</p>
+            <b><input class="right semibold" type="text" name="apt" placeholder="Apt" [(ngModel)]="apt"
+                [readonly]="!isEditingFields"></b>
+          </li>
+          <li>
+            <p>Zip code</p>
+            <b><input class="right semibold" type="text" name="zip" placeholder="Zip" [(ngModel)]="zip"
+                [readonly]="!isEditingFields"></b>
+          </li>
+          <li class="city-container">
+            <div class="col-6">
+              <p>City</p>
+              <b><input class="right semibold" type="text" name="city" placeholder="City" [(ngModel)]="city"
+                  [readonly]="!isEditingFields"></b>
+            </div>
+            <div class="col-6">
+              <div class="select-wrapper">
+                <select class="algo-input-state" name="state" [(ngModel)]="state">
+                  <option [value]="state.abbreviation" *ngFor="let state of states">{{state.abbreviation}}</option>
+                </select>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="guava-modal files" *ngIf="editPhoto">
+  <div class="guava-modal-content">
+    <div class="guava-modal-title">
+      <h2>Select Profile Photo</h2>
+    </div>
+    <div class="card">
+      <photo-upload [user]="data" [uploadPhoto]="uploadNow" (eventOutput)="getInfoFromUploadPhoto($event)">
+      </photo-upload>
+    </div>
+    <div class="guava-modal-footer">
+      <a (click)="savePhoto()" [ngClass]="readyToUpload ? 'button-submit' : 'button-flat-gray'">SAVE</a>
+      <a (click)="openEditPicModal()" class="button-flat-gray">CANCEL</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- Review modal -->
+<div class="guava-modal" *ngIf="showReview">
+  <div class="guava-modal-content">
+    <div class="guava-modal-title">
+      <!-- <h1>Alert</h1> -->
+    </div>
+    <div class="close" (click)="showReview = false">
+      <img src="../../../assets/images/close.svg" alt="">
+    </div>
+    <div class="guava-modal-body">
+      <b style="font-size:18px;text-align:center;margin-bottom:20px;">Last Step:</b>
+      <p>
+        Please verify the payment details on the following form and provide your electronic signature. You can sign this
+        right on your computer or phone.
+      </p>
+      <button class="button-submit" (click)="openDocusign()">GO TO FORM</button>
+    </div>
+  </div>
+</div>
+
+<!-- Alert modal -->
+<div class="guava-modal" *ngIf="alert !== ''">
+  <div class="guava-modal-content">
+    <div class="close" (click)="closeAlertModal()">
+      <img src="../../../assets/images/close.svg" alt="">
+    </div>
+    <div class="guava-modal-title">
+      <!-- <h1>Alert</h1> -->
+    </div>
+    <div class="guava-modal-body">
+      <p>
+        {{alert}}
+      </p>
+    </div>
+  </div>
+</div>

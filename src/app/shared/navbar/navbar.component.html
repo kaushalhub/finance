@@ -1,0 +1,44 @@
+<div class="navbar-container">
+    <div class="navbar-buttons">
+        <div *ngIf="menuForm" class="back-button" [routerLink]="[backRoute]">
+            <div class="barUp"></div>
+            <div class="barDown"></div>
+        </div>
+        <div class="logo-container" (click)="openlanding()">
+            <img src="../../../../assets/images/logo.png" alt="">
+        </div>
+        <div class="menu-button" (click)="openNavbar()">
+            <div [ngClass]="status ? 'bar1' : 'change-bar1'"></div>
+            <div [ngClass]="status ? 'bar2' : 'change-bar2'"></div>
+            <div [ngClass]="status ? 'bar3' : 'change-bar3'"></div>
+        </div>
+    </div>
+    <div [ngClass]="status ? 'navbar-menu-hidden' : 'navbar-menu'">
+        <div id="list-menu-navbar" class="row-navbar-menu">
+            <div class="navbar-link"><a href="{{landingUrl}}why">Why Guava?</a></div>
+            <div class="navbar-link"><a href="{{landingUrl}}how">How it works</a></div>
+            <div class="navbar-link"><a href="{{landingUrl}}about">About Us</a></div>
+            <div class="navbar-link"><a href="{{landingUrl}}basics">Insurance basics</a></div>
+            <div class="navbar-link"><a href="{{landingUrl}}">FAQ</a></div>
+            <div class="navbar-link"><a href="{{landingUrl}}">Contact us</a></div>
+        </div>
+        <div id="login-button-navbar" class="row-navbar-menu">
+            <div class="navbar-link" *ngIf="!isLoggedIn"><a (click)="goToLogIn()">Login</a></div>
+            <div class="navbar-link" *ngIf="isLoggedIn"><a (click)="logOut()">Log out</a></div>
+        </div>
+        <div id="social-links">
+            <div class="navbar-social-link">
+                <img src="../../../../assets/images/Facebook.svg" alt="Facebook">
+            </div>
+            <div class="navbar-social-link">
+                <img src="../../../../assets/images/Twitter.svg" alt="Facebook">
+            </div>
+            <div class="navbar-social-link">
+                <img src="../../../../assets/images/LinkedIn.svg" alt="Facebook">
+            </div>
+            <div class="navbar-social-link">
+                <img src="../../../../assets/images/Youtube.svg" alt="Facebook">
+            </div>
+        </div>
+    </div>
+</div>

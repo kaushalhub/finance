@@ -1,0 +1,193 @@
+@import "../../../variables.scss";
+
+.beneficiaries {
+  .header {
+    p {
+      color: $darkGray;
+    }
+  }
+  .info-container {
+    .list-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .edit-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      margin-bottom: 30px;
+      @media screen and (max-width: 600px) {
+        flex-direction: column-reverse;
+        justify-content: flex-start;
+      }
+      .description {
+        flex: 0 0 46%;
+        display: flex;
+        flex-direction: column;
+        padding-top: 32px;
+        @media screen and (max-width: 600px) {
+          flex: 1;
+        }
+        p {
+          font-size: 16px;
+          font-family: poppins;
+          line-height: 25px;
+          margin-bottom: 40px;
+        }
+        .button-submit {
+          text-align: center;
+          text-transform: uppercase;
+          max-width: 100%;
+          padding: 15px 0;
+          margin-bottom: 20px;
+        }
+      }
+      .fields {
+        flex: 0 0 46%;
+        @media screen and (max-width: 600px) {
+          flex: 1;
+        }
+        .card-container {
+          .title {
+            margin-bottom: 15px;
+            p {
+              text-transform: none;
+              font-weight: 600;
+            }
+          }
+          .card {
+            &.percentage {
+              .row {
+                &:nth-child(1) {
+                  margin-bottom: 20px;
+                }
+                b {
+                  font-size: 21px;
+                }
+              }
+            }
+          }
+        }
+        .contact-info {
+          b {
+            font-size: 15px;
+          }
+          p {
+            font-size: 15px;
+            margin-bottom: 16px;
+          }
+          a {
+            display: flex;
+            cursor: pointer;
+            align-items: center;
+            font-size: 12px;
+            span {
+              color: #004069;
+              text-decoration: underline;
+            }
+            img {
+              width: 16px;
+              height: 16px;
+              object-fit: container;
+              object-position: center;
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+    }
+    .card {
+      .row {
+        .percentage {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          @media screen and (min-width: 601px) {
+            width: 60px;
+            height: 60px;
+            font-size: 20px;
+          }
+          @media screen and (max-width: 600px) {
+            min-width: 40px;
+            justify-content: center;
+          }
+          input {
+            background: transparent;
+            width: 80%;
+            text-align: center;
+            color: white;
+            font-size: inherit;
+          }
+        }
+        p {
+          input {
+            font-size: 16px;
+            margin-right: 5px;
+            @media screen and (max-width: 600px) {
+              max-width: 80px;
+            }
+          }
+        }
+        p.end {
+          text-transform: uppercase;
+          font-family: lato;
+          font-weight: 200;
+          input {
+            text-transform: uppercase;
+            font-family: lato;
+            font-weight: 200;
+            color: inherit;
+            text-align: right;
+          }
+        }
+        &.addNewBeneficiary {
+          cursor: pointer;
+          justify-content: center;
+        }
+        .select-wrapper {
+          width: 100%;
+          position: relative;
+          select {
+            width: 100%;
+            font-size: 15px;
+            color: #464646;
+            font-family: poppins;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-size: 15px auto;
+            background-position: right 5px;
+            background-repeat: no-repeat;
+            background-color: transparent;
+            border: 0;
+            line-height: 20px;
+            background-image: url("../../../assets/images/chevron-down.png");
+            text-transform: capitalize;
+            option {
+              text-transform: capitalize;
+            }
+          }
+        }
+      }
+      &.editingFields {
+        .percentage {
+          input {
+            border-color: white;
+          }
+        }
+      }
+    }
+  }
+  .note {
+    font-size: 11px;
+  }
+}
+
+.input-sizing,
+.p-sizing {
+  width: 100%;
+}
